@@ -24,7 +24,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=2)
 np.random.seed(1337) # for reproducibility
 train_path = './train.fasta'
 valid_path = './valid.fasta'
-test_path = './test.fasta'
+test_path = './detail.fasta'
 
 
 chars = "ACGT"
@@ -88,12 +88,12 @@ def my_kernel_initializer(shape, dtype=None):
 def loadModel():
     #model.load_weights('my_model_weights.h5')
     #json and create model
-    json_file = open('./model/model_0_1.json', 'r')
+    json_file = open('./model/model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     model = model_from_json(loaded_model_json)
     # load weights into new model
-    model.load_weights("./model/model_0_1.h5")
+    model.load_weights("./model/model_2.h5")
     optimizer = RMSprop(lr=0.001)
     model.compile(loss='categorical_crossentropy', optimizer=optimizer)
     print("Loaded model from disk")

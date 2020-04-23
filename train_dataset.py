@@ -5,7 +5,7 @@ from keras.callbacks import LambdaCallback, Callback
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers import LSTM
-from keras.layers import Conv1D, MaxPooling1D
+from keras.layers import Conv1D, Conv2D, MaxPooling1D
 from keras.optimizers import RMSprop
 from keras.utils.data_utils import get_file
 from keras.models import model_from_json
@@ -20,6 +20,7 @@ from keras import backend as K
 from itertools import product
 from Bio import SeqIO
 from keras.callbacks import EarlyStopping
+import csv
 early_stopping = EarlyStopping(monitor='val_loss', patience=2)
 np.random.seed(1337) # for reproducibility
 train_path = './train.fasta'
@@ -213,6 +214,10 @@ def on_epoch_end(epoch):
         batch_num = i
     return entropy/batch_num*math.log(math.e, 2)
 
+f = open('training_loss.csv','w',encoding='utf-8')
+csv_writer = csv.writer(f)
+csv_writer.writerow(["epoch","batch_num","loss"])
+
 entropy = []
 for epoch in range(epochs):
     print("this is epoch: ", epoch)
@@ -222,11 +227,13 @@ for epoch in range(epochs):
         x=model.train_on_batch(_input,_labels)
         if(i%100==0):
             print(epoch,'\t', x*math.log(math.e,2))
+            csv_writer.writerow([str(epoch), str(i), str(x*math.log(math.e,2))])
     saveModel(epoch)
     testEntropy = on_epoch_end(epoch)
     print(testEntropy)
     entropy.append(testEntropy)
 print(entropy)
+f.close()
 
 
 
