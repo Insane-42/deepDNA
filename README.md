@@ -4,7 +4,7 @@ a hybrid convolutional and recurrent neural network for compressing compression 
 deepDNA, a novel unified model called deepDNA that combines the convolutional neural network (CNN) with the long short-term memory network (LSTM) for compressing human mitochondrial genome sequences. The experiment has shown that out method deepDNA is able to learn sequence local features through a convolutional layer, and to learn higher level representations of long-term sequences dependencies through a long short-term memory network (LSTM) layer. We evaluated the learned genome sequences representations model on human mitochondrial genome sequences compressing tasks and achieved a satisfactory result.
 
 ## Install
-This is a step by step instruction for installing the deepDNA for python 2.7*.
+This is a step by step instruction for installing the deepDNA for python 3.6.
 ### Requirements for python modules & versions
 * TensorFlow >= 1.9.0
 * Keras >= 2.2.0
@@ -26,7 +26,7 @@ Train the deepDNA model parameters using training dataset.
 ### test_dataset.py
 Test the deepDNA model using test dataset.
 
-    
+
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
